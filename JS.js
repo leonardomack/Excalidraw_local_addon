@@ -25,11 +25,11 @@
             pinSidebar: 'Fixar menu',
             unpinSidebar: 'Desafixar menu',
             language: 'Idioma',
-            selectFolder: '📂 Abrir Projetos',
-            changeFolder: '📂 Mudar Pasta',
-            reconnectFolder: '🔌 Conectar Pasta',
-            newFile: '📄 Novo',
-            deleteFile: '🗑️ Excluir',
+            selectFolder: 'Abrir Projetos',
+            changeFolder: 'Mudar Pasta',
+            reconnectFolder: 'Conectar Pasta',
+            newFile: 'Novo',
+            deleteFile: 'Excluir',
             noFileOpen: 'Nenhum arquivo aberto',
             open: 'Aberto:',
             autoSaved: '🔄 Auto-Salvo',
@@ -46,11 +46,11 @@
             pinSidebar: 'Pin menu',
             unpinSidebar: 'Unpin menu',
             language: 'Language',
-            selectFolder: '📂 Open Projects',
-            changeFolder: '📂 Change Folder',
-            reconnectFolder: '🔌 Reconnect Folder',
-            newFile: '📄 New',
-            deleteFile: '🗑️ Delete',
+            selectFolder: 'Open Projects',
+            changeFolder: 'Change Folder',
+            reconnectFolder: 'Reconnect Folder',
+            newFile: 'New',
+            deleteFile: 'Delete',
             noFileOpen: 'No file open',
             open: 'Open:',
             autoSaved: '🔄 Auto-saved',
@@ -67,11 +67,11 @@
             pinSidebar: 'Fijar menú',
             unpinSidebar: 'Desfijar menú',
             language: 'Idioma',
-            selectFolder: '📂 Abrir proyectos',
-            changeFolder: '📂 Cambiar carpeta',
-            reconnectFolder: '🔌 Reconectar carpeta',
-            newFile: '📄 Nuevo',
-            deleteFile: '🗑️ Eliminar',
+            selectFolder: 'Abrir proyectos',
+            changeFolder: 'Cambiar carpeta',
+            reconnectFolder: 'Reconectar carpeta',
+            newFile: 'Nuevo',
+            deleteFile: 'Eliminar',
             noFileOpen: 'Ningún archivo abierto',
             open: 'Abierto:',
             autoSaved: '🔄 Guardado automático',
@@ -88,11 +88,11 @@
             pinSidebar: 'Épingler le menu',
             unpinSidebar: 'Désépingler le menu',
             language: 'Langue',
-            selectFolder: '📂 Ouvrir les projets',
-            changeFolder: '📂 Changer de dossier',
-            reconnectFolder: '🔌 Reconnecter le dossier',
-            newFile: '📄 Nouveau',
-            deleteFile: '🗑️ Supprimer',
+            selectFolder: 'Ouvrir les projets',
+            changeFolder: 'Changer de dossier',
+            reconnectFolder: 'Reconnecter le dossier',
+            newFile: 'Nouveau',
+            deleteFile: 'Supprimer',
             noFileOpen: 'Aucun fichier ouvert',
             open: 'Ouvert :',
             autoSaved: '🔄 Enregistré automatiquement',
@@ -109,11 +109,11 @@
             pinSidebar: 'Fissa menu',
             unpinSidebar: 'Sblocca menu',
             language: 'Lingua',
-            selectFolder: '📂 Apri progetti',
-            changeFolder: '📂 Cambia cartella',
-            reconnectFolder: '🔌 Riconnetti cartella',
-            newFile: '📄 Nuovo',
-            deleteFile: '🗑️ Elimina',
+            selectFolder: 'Apri progetti',
+            changeFolder: 'Cambia cartella',
+            reconnectFolder: 'Riconnetti cartella',
+            newFile: 'Nuovo',
+            deleteFile: 'Elimina',
             noFileOpen: 'Nessun file aperto',
             open: 'Aperto:',
             autoSaved: '🔄 Salvato automaticamente',
@@ -130,11 +130,11 @@
             pinSidebar: 'Menü anheften',
             unpinSidebar: 'Menü lösen',
             language: 'Sprache',
-            selectFolder: '📂 Projekte öffnen',
-            changeFolder: '📂 Ordner ändern',
-            reconnectFolder: '🔌 Ordner erneut verbinden',
-            newFile: '📄 Neu',
-            deleteFile: '🗑️ Löschen',
+            selectFolder: 'Projekte öffnen',
+            changeFolder: 'Ordner ändern',
+            reconnectFolder: 'Ordner erneut verbinden',
+            newFile: 'Neu',
+            deleteFile: 'Löschen',
             noFileOpen: 'Keine Datei geöffnet',
             open: 'Geöffnet:',
             autoSaved: '🔄 Automatisch gespeichert',
@@ -221,25 +221,25 @@
     sidebar.id = 'custom-excalidraw-sidebar';
     sidebar.innerHTML = `
         <div class="sidebar-content">
-            <div style="flex-shrink: 0;">
-                <h3 style="margin: 0 0 15px 0; font-size: 15px; display: flex; justify-content: space-between; align-items: center;">
-                    <span id="sidebar-title"></span>
-                    <button id="pin-sidebar" type="button" style="cursor:pointer; font-size: 13px;" aria-label="">📌</button>
-                </h3>
-                <div class="language-control">
-                    <label id="language-label" for="language-select"></label>
-                    <select id="language-select">
-                        ${Object.entries(languages).map(([code, name]) => `<option value="${code}">${name}</option>`).join('')}
-                    </select>
+            <div class="sidebar-header">
+                <div class="sidebar-actions">
+                    <button id="btn-new-file" class="sidebar-icon-btn" type="button">📄</button>
+                    <button id="btn-delete-file" class="sidebar-icon-btn" type="button">🗑️</button>
+                    <button id="btn-select-folder" class="sidebar-icon-btn" type="button">📂</button>
                 </div>
-                <div class="sidebar-buttons">
-                    <button id="btn-select-folder" class="sidebar-btn"></button>
-                    <button id="btn-new-file" class="sidebar-btn"></button>
-                    <button id="btn-delete-file" class="sidebar-btn"></button>
-                </div>
+                <button id="pin-sidebar" class="pin-button" type="button">📌</button>
             </div>
             <div id="file-tree"></div>
             <div id="active-file-status"></div>
+            <div class="sidebar-footer">
+                <div class="language-control">
+                    <button id="language-toggle" class="footer-icon-btn" type="button" aria-expanded="false">🌐</button>
+                    <select id="language-select" aria-label="">
+                        ${Object.entries(languages).map(([code, name]) => `<option value="${code}">${name}</option>`).join('')}
+                    </select>
+                </div>
+                <small id="sidebar-brand"></small>
+            </div>
         </div>
     `;
     document.body.appendChild(sidebar);
@@ -248,16 +248,22 @@
     const btnNewFile = document.getElementById('btn-new-file');
     const btnDeleteFile = document.getElementById('btn-delete-file');
     const pinBtn = document.getElementById('pin-sidebar');
+    const languageToggle = document.getElementById('language-toggle');
+    const languageControl = sidebar.querySelector('.language-control');
     const languageSelect = document.getElementById('language-select');
 
     const updateFolderButton = () => {
         if (btnSelect.dataset.action === 'reactivate') {
-            btnSelect.innerText = translate('reconnectFolder');
+            btnSelect.title = translate('reconnectFolder');
+            btnSelect.dataset.tooltip = translate('reconnectFolder');
         } else if (currentDirHandle) {
-            btnSelect.innerText = translate('changeFolder');
+            btnSelect.title = translate('changeFolder');
+            btnSelect.dataset.tooltip = translate('changeFolder');
         } else {
-            btnSelect.innerText = translate('selectFolder');
+            btnSelect.title = translate('selectFolder');
+            btnSelect.dataset.tooltip = translate('selectFolder');
         }
+        btnSelect.setAttribute('aria-label', btnSelect.title);
     };
 
     const updateFileStatus = (status = 'open', name = '') => {
@@ -280,12 +286,19 @@
 
     const applyLanguage = () => {
         sidebar.lang = currentLanguage;
-        document.getElementById('sidebar-title').innerText = translate('appName');
-        document.getElementById('language-label').innerText = translate('language');
-        btnNewFile.innerText = translate('newFile');
-        btnDeleteFile.innerText = translate('deleteFile');
+        document.getElementById('sidebar-brand').innerText = translate('appName');
+        btnNewFile.title = translate('newFile');
+        btnNewFile.dataset.tooltip = translate('newFile');
+        btnNewFile.setAttribute('aria-label', btnNewFile.title);
+        btnDeleteFile.title = translate('deleteFile');
+        btnDeleteFile.dataset.tooltip = translate('deleteFile');
+        btnDeleteFile.setAttribute('aria-label', btnDeleteFile.title);
+        languageToggle.title = translate('language');
+        languageToggle.setAttribute('aria-label', languageToggle.title);
+        languageSelect.setAttribute('aria-label', translate('language'));
         languageSelect.value = currentLanguage;
         pinBtn.title = sidebar.classList.contains('pinned') ? translate('unpinSidebar') : translate('pinSidebar');
+        pinBtn.dataset.tooltip = pinBtn.title;
         pinBtn.setAttribute('aria-label', pinBtn.title);
         updateFolderButton();
 
@@ -305,6 +318,12 @@
         applyLanguage();
     });
 
+    languageToggle.addEventListener('click', () => {
+        const isOpen = languageControl.classList.toggle('open');
+        languageToggle.setAttribute('aria-expanded', String(isOpen));
+        if (isOpen) languageSelect.focus();
+    });
+
     // --- LÓGICA DE AFASTAR O EXCALIDRAW ---
     sidebar.addEventListener('mouseenter', () => document.body.classList.add('sidebar-active'));
     sidebar.addEventListener('mouseleave', () => {
@@ -320,6 +339,7 @@
         document.body.classList.add('sidebar-active'); 
         pinBtn.style.opacity = '1';
         pinBtn.title = translate('unpinSidebar');
+        pinBtn.dataset.tooltip = pinBtn.title;
         pinBtn.setAttribute('aria-label', pinBtn.title);
     } else {
         pinBtn.style.opacity = '0.3';
@@ -329,10 +349,13 @@
         const p = sidebar.classList.toggle('pinned');
         pinBtn.style.opacity = p ? '1' : '0.3';
         pinBtn.title = p ? translate('unpinSidebar') : translate('pinSidebar');
+        pinBtn.dataset.tooltip = pinBtn.title;
         pinBtn.setAttribute('aria-label', pinBtn.title);
         setCookie('excaliSidebarPinned', p);
         if (p) {
             document.body.classList.add('sidebar-active');
+        } else {
+            document.body.classList.remove('sidebar-active');
         }
     });
 

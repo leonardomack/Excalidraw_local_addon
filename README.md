@@ -89,7 +89,7 @@ Depois da primeira autorização, o script guarda o identificador da pasta em In
 
 ### Alterar o idioma
 
-Use o seletor **Idioma** no topo da barra lateral para escolher uma das seis opções disponíveis:
+Clique no ícone de globo no rodapé da barra lateral para abrir o seletor **Idioma** e escolher uma das seis opções disponíveis:
 
 - Português (Brasil);
 - English;
@@ -100,13 +100,15 @@ Use o seletor **Idioma** no topo da barra lateral para escolher uma das seis op�
 
 A escolha é salva em IndexedDB no mesmo banco `ExcaliLocalDB` e no mesmo object store `settings` usados para persistir a pasta. A pasta continua armazenada na chave `folderHandle`, enquanto o idioma fica armazenado na chave `language`. Assim, o idioma escolhido é restaurado quando a página é recarregada. O padrão inicial é português (Brasil) quando nenhuma escolha anterior é encontrada.
 
-A tradução é aplicada ao nome da aplicação, botões, seletor, dica de fixação, estados do arquivo, mensagens de erro, confirmação de exclusão e descrição do arquivo criado pelo seletor nativo.
+A tradução é aplicada ao nome discreto da aplicação no rodapé, tooltips dos ícones, seletor, dica de fixação, estados do arquivo, mensagens de erro, confirmação de exclusão e descrição do arquivo criado pelo seletor nativo.
 
 ### Uso da barra lateral
 
-#### Abrir uma pasta
+#### Ações e abrir uma pasta
 
-**Abrir Projetos** abre o seletor de diretórios. Na primeira utilização ele escolhe a pasta; nas utilizações seguintes, o texto normalmente aparece como **Mudar Pasta** e permite trocar a pasta selecionada.
+Na parte superior, os três ícones à esquerda representam **Novo**, **Excluir** e **Abrir Projetos**. Depois que uma pasta é conectada, o terceiro ícone passa a representar **Mudar Pasta**. Passe o mouse sobre um ícone para ver sua tooltip. O pin vermelho fica alinhado à direita e fixa ou libera a barra lateral.
+
+O ícone de pasta abre o seletor de diretórios. Na primeira utilização ele escolhe a pasta; nas utilizações seguintes, permite trocar a pasta selecionada.
 
 O painel é atualizado automaticamente a cada cinco segundos enquanto uma pasta estiver conectada. A árvore ordena diretórios antes de arquivos e ordena cada grupo alfabeticamente.
 
@@ -349,13 +351,15 @@ The handle is persisted in IndexedDB so the script can try to reconnect after a 
 
 ### Changing the language
 
-Use the **Idioma** selector at the top of the sidebar to choose one of the six available languages: Portuguese (Brazil), English, Spanish, French, Italian or German. The selection is saved in IndexedDB in the same `ExcaliLocalDB` database and `settings` object store used for the selected directory. The directory remains under the `folderHandle` key, while the language is stored under the `language` key.
+Click the globe icon in the sidebar footer to open the **Language** selector and choose one of the six available languages: Portuguese (Brazil), English, Spanish, French, Italian or German. The selection is saved in IndexedDB in the same `ExcaliLocalDB` database and `settings` object store used for the selected directory. The directory remains under the `folderHandle` key, while the language is stored under the `language` key.
 
 The selected language is restored after a page reload. If no previous choice exists, the initial language is Brazilian Portuguese. Translations cover the application name, buttons, pin hint, file statuses, error and delete-confirmation messages, and the native save-picker description and suggested filename.
 
 ### Using the sidebar
 
-Click **Abrir Projetos** to choose a directory, or **Mudar Pasta** to switch the current directory. The tree refreshes every five seconds while a directory is connected. Directories are listed before files, and entries are sorted alphabetically within each group.
+At the top, the three icons on the left represent **New**, **Delete** and **Open Projects**. After a directory is connected, the third icon represents **Change Folder**. Hover over an icon to see its tooltip. The red pin is aligned to the right and keeps the sidebar pinned or released.
+
+Click the folder icon to choose a directory or change the current directory. The tree refreshes every five seconds while a directory is connected. Directories are listed before files, and entries are sorted alphabetically within each group.
 
 Click a folder to expand or collapse it. Only directories and names ending exactly in `.exw` are displayed. Click a file to open it. The script reads the local file and dispatches a synthetic drop event to the Excalidraw container. Before switching files, it attempts to save the current file.
 
