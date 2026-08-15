@@ -1,4 +1,4 @@
-(function() {
+(async function() {
     if (document.getElementById('custom-excalidraw-sidebar')) return;
 
     // --- COOKIES ---
@@ -9,33 +9,200 @@
         return p.length === 2 ? p.pop().split(';').shift() : null;
     };
 
-    // --- NOVO: PERSISTÊNCIA DA PASTA VIA INDEXEDDB (Sem APIs externas) ---
-    const saveFolderHandle = (handle) => {
+    // --- IDIOMAS ---
+    const languages = {
+        'pt-BR': 'Português (Brasil)',
+        'en': 'English',
+        'es': 'Español',
+        'fr': 'Français',
+        'it': 'Italiano',
+        'de': 'Deutsch'
+    };
+
+    const translations = {
+        'pt-BR': {
+            appName: 'Excalidraw Local Addon',
+            pinSidebar: 'Fixar menu',
+            unpinSidebar: 'Desafixar menu',
+            language: 'Idioma',
+            selectFolder: '📂 Abrir Projetos',
+            changeFolder: '📂 Mudar Pasta',
+            reconnectFolder: '🔌 Conectar Pasta',
+            newFile: '📄 Novo',
+            deleteFile: '🗑️ Excluir',
+            noFileOpen: 'Nenhum arquivo aberto',
+            open: 'Aberto:',
+            autoSaved: '🔄 Auto-Salvo',
+            saved: '✅ Salvo',
+            errorLoading: 'Erro ao carregar.',
+            selectFile: 'Selecione um arquivo na lista.',
+            confirmDelete: 'Tem certeza que deseja excluir "{name}"?',
+            deleted: 'Excluído',
+            saveFileDescription: 'Excalidraw Workspace',
+            suggestedFileName: 'Novo_Projeto.exw'
+        },
+        'en': {
+            appName: 'Excalidraw Local Addon',
+            pinSidebar: 'Pin menu',
+            unpinSidebar: 'Unpin menu',
+            language: 'Language',
+            selectFolder: '📂 Open Projects',
+            changeFolder: '📂 Change Folder',
+            reconnectFolder: '🔌 Reconnect Folder',
+            newFile: '📄 New',
+            deleteFile: '🗑️ Delete',
+            noFileOpen: 'No file open',
+            open: 'Open:',
+            autoSaved: '🔄 Auto-saved',
+            saved: '✅ Saved',
+            errorLoading: 'Error loading file.',
+            selectFile: 'Select a file from the list.',
+            confirmDelete: 'Are you sure you want to delete "{name}"?',
+            deleted: 'Deleted',
+            saveFileDescription: 'Excalidraw Workspace',
+            suggestedFileName: 'New_Project.exw'
+        },
+        'es': {
+            appName: 'Excalidraw Local Addon',
+            pinSidebar: 'Fijar menú',
+            unpinSidebar: 'Desfijar menú',
+            language: 'Idioma',
+            selectFolder: '📂 Abrir proyectos',
+            changeFolder: '📂 Cambiar carpeta',
+            reconnectFolder: '🔌 Reconectar carpeta',
+            newFile: '📄 Nuevo',
+            deleteFile: '🗑️ Eliminar',
+            noFileOpen: 'Ningún archivo abierto',
+            open: 'Abierto:',
+            autoSaved: '🔄 Guardado automático',
+            saved: '✅ Guardado',
+            errorLoading: 'Error al cargar el archivo.',
+            selectFile: 'Selecciona un archivo de la lista.',
+            confirmDelete: '¿Seguro que deseas eliminar "{name}"?',
+            deleted: 'Eliminado',
+            saveFileDescription: 'Espacio de trabajo de Excalidraw',
+            suggestedFileName: 'Nuevo_Proyecto.exw'
+        },
+        'fr': {
+            appName: 'Excalidraw Local Addon',
+            pinSidebar: 'Épingler le menu',
+            unpinSidebar: 'Désépingler le menu',
+            language: 'Langue',
+            selectFolder: '📂 Ouvrir les projets',
+            changeFolder: '📂 Changer de dossier',
+            reconnectFolder: '🔌 Reconnecter le dossier',
+            newFile: '📄 Nouveau',
+            deleteFile: '🗑️ Supprimer',
+            noFileOpen: 'Aucun fichier ouvert',
+            open: 'Ouvert :',
+            autoSaved: '🔄 Enregistré automatiquement',
+            saved: '✅ Enregistré',
+            errorLoading: 'Erreur lors du chargement du fichier.',
+            selectFile: 'Sélectionnez un fichier dans la liste.',
+            confirmDelete: 'Voulez-vous vraiment supprimer « {name} » ?',
+            deleted: 'Supprimé',
+            saveFileDescription: 'Espace de travail Excalidraw',
+            suggestedFileName: 'Nouveau_Projet.exw'
+        },
+        'it': {
+            appName: 'Excalidraw Local Addon',
+            pinSidebar: 'Fissa menu',
+            unpinSidebar: 'Sblocca menu',
+            language: 'Lingua',
+            selectFolder: '📂 Apri progetti',
+            changeFolder: '📂 Cambia cartella',
+            reconnectFolder: '🔌 Riconnetti cartella',
+            newFile: '📄 Nuovo',
+            deleteFile: '🗑️ Elimina',
+            noFileOpen: 'Nessun file aperto',
+            open: 'Aperto:',
+            autoSaved: '🔄 Salvato automaticamente',
+            saved: '✅ Salvato',
+            errorLoading: 'Errore durante il caricamento del file.',
+            selectFile: 'Seleziona un file dall’elenco.',
+            confirmDelete: 'Vuoi davvero eliminare "{name}"?',
+            deleted: 'Eliminato',
+            saveFileDescription: 'Area di lavoro Excalidraw',
+            suggestedFileName: 'Nuovo_Progetto.exw'
+        },
+        'de': {
+            appName: 'Excalidraw Local Addon',
+            pinSidebar: 'Menü anheften',
+            unpinSidebar: 'Menü lösen',
+            language: 'Sprache',
+            selectFolder: '📂 Projekte öffnen',
+            changeFolder: '📂 Ordner ändern',
+            reconnectFolder: '🔌 Ordner erneut verbinden',
+            newFile: '📄 Neu',
+            deleteFile: '🗑️ Löschen',
+            noFileOpen: 'Keine Datei geöffnet',
+            open: 'Geöffnet:',
+            autoSaved: '🔄 Automatisch gespeichert',
+            saved: '✅ Gespeichert',
+            errorLoading: 'Fehler beim Laden der Datei.',
+            selectFile: 'Wählen Sie eine Datei aus der Liste aus.',
+            confirmDelete: 'Möchten Sie „{name}“ wirklich löschen?',
+            deleted: 'Gelöscht',
+            saveFileDescription: 'Excalidraw-Arbeitsbereich',
+            suggestedFileName: 'Neues_Projekt.exw'
+        }
+    };
+
+    // --- PERSISTÊNCIA DE CONFIGURAÇÕES VIA INDEXEDDB (Sem APIs externas) ---
+    const saveSetting = (key, value) => {
         return new Promise((resolve) => {
             const req = indexedDB.open("ExcaliLocalDB", 1);
-            req.onupgradeneeded = (e) => e.target.result.createObjectStore("settings");
+            req.onupgradeneeded = (e) => {
+                if (!e.target.result.objectStoreNames.contains('settings')) {
+                    e.target.result.createObjectStore('settings');
+                }
+            };
             req.onsuccess = (e) => {
                 const db = e.target.result;
                 const tx = db.transaction("settings", "readwrite");
-                tx.objectStore("settings").put(handle, "folderHandle");
+                tx.objectStore("settings").put(value, key);
                 tx.oncomplete = () => resolve();
+                tx.onerror = () => resolve();
             };
+            req.onerror = () => resolve();
         });
     };
 
-    const getFolderHandle = () => {
+    const getSetting = (key) => {
         return new Promise((resolve) => {
             const req = indexedDB.open("ExcaliLocalDB", 1);
-            req.onupgradeneeded = (e) => e.target.result.createObjectStore("settings");
+            req.onupgradeneeded = (e) => {
+                if (!e.target.result.objectStoreNames.contains('settings')) {
+                    e.target.result.createObjectStore('settings');
+                }
+            };
             req.onsuccess = (e) => {
                 const db = e.target.result;
                 const tx = db.transaction("settings", "readonly");
-                const storeReq = tx.objectStore("settings").get("folderHandle");
+                const storeReq = tx.objectStore("settings").get(key);
                 storeReq.onsuccess = () => resolve(storeReq.result);
                 storeReq.onerror = () => resolve(null);
             };
             req.onerror = () => resolve(null);
         });
+    };
+
+    const saveFolderHandle = (handle) => saveSetting('folderHandle', handle);
+    const getFolderHandle = () => getSetting('folderHandle');
+    const saveLanguage = (language) => saveSetting('language', language);
+    const getLanguage = () => getSetting('language');
+
+    let currentLanguage = await getLanguage();
+    if (!Object.prototype.hasOwnProperty.call(languages, currentLanguage)) {
+        currentLanguage = 'pt-BR';
+    }
+
+    const translate = (key, values = {}) => {
+        let message = (translations[currentLanguage] && translations[currentLanguage][key]) || translations['pt-BR'][key] || key;
+        Object.entries(values).forEach(([name, value]) => {
+            message = message.replace(`{${name}}`, value);
+        });
+        return message;
     };
 
     // --- ESCUDO LOCAL ---
@@ -56,22 +223,87 @@
         <div class="sidebar-content">
             <div style="flex-shrink: 0;">
                 <h3 style="margin: 0 0 15px 0; font-size: 15px; display: flex; justify-content: space-between; align-items: center;">
-                    Excalidraw Local
-                    <span id="pin-sidebar" style="cursor:pointer; font-size: 13px;" title="Fixar menu">📌</span>
+                    <span id="sidebar-title"></span>
+                    <button id="pin-sidebar" type="button" style="cursor:pointer; font-size: 13px;" aria-label="">📌</button>
                 </h3>
+                <div class="language-control">
+                    <label id="language-label" for="language-select"></label>
+                    <select id="language-select">
+                        ${Object.entries(languages).map(([code, name]) => `<option value="${code}">${name}</option>`).join('')}
+                    </select>
+                </div>
                 <div class="sidebar-buttons">
-                    <button id="btn-select-folder" class="sidebar-btn">📂 Abrir Projetos</button>
-                    <button id="btn-new-file" class="sidebar-btn">📄 Novo</button>
-                    <button id="btn-delete-file" class="sidebar-btn">🗑️ Excluir</button>
+                    <button id="btn-select-folder" class="sidebar-btn"></button>
+                    <button id="btn-new-file" class="sidebar-btn"></button>
+                    <button id="btn-delete-file" class="sidebar-btn"></button>
                 </div>
             </div>
             <div id="file-tree"></div>
-            <div id="active-file-status">Nenhum arquivo aberto</div>
+            <div id="active-file-status"></div>
         </div>
     `;
     document.body.appendChild(sidebar);
 
     const btnSelect = document.getElementById('btn-select-folder');
+    const btnNewFile = document.getElementById('btn-new-file');
+    const btnDeleteFile = document.getElementById('btn-delete-file');
+    const pinBtn = document.getElementById('pin-sidebar');
+    const languageSelect = document.getElementById('language-select');
+
+    const updateFolderButton = () => {
+        if (btnSelect.dataset.action === 'reactivate') {
+            btnSelect.innerText = translate('reconnectFolder');
+        } else if (currentDirHandle) {
+            btnSelect.innerText = translate('changeFolder');
+        } else {
+            btnSelect.innerText = translate('selectFolder');
+        }
+    };
+
+    const updateFileStatus = (status = 'open', name = '') => {
+        const statusDiv = document.getElementById('active-file-status');
+        statusDiv.replaceChildren();
+        if (status === 'open' && name) {
+            const label = document.createElement('b');
+            label.innerText = translate('open');
+            statusDiv.append(label, document.createTextNode(` ${name}`));
+        } else if (status === 'saved' || status === 'autoSaved') {
+            const message = status === 'autoSaved' ? translate('autoSaved') : translate('saved');
+            const label = document.createElement('span');
+            label.style.color = '#4caf50';
+            label.innerText = `${message}: ${name}`;
+            statusDiv.appendChild(label);
+        } else {
+            statusDiv.innerText = translate(status);
+        }
+    };
+
+    const applyLanguage = () => {
+        sidebar.lang = currentLanguage;
+        document.getElementById('sidebar-title').innerText = translate('appName');
+        document.getElementById('language-label').innerText = translate('language');
+        btnNewFile.innerText = translate('newFile');
+        btnDeleteFile.innerText = translate('deleteFile');
+        languageSelect.value = currentLanguage;
+        pinBtn.title = sidebar.classList.contains('pinned') ? translate('unpinSidebar') : translate('pinSidebar');
+        pinBtn.setAttribute('aria-label', pinBtn.title);
+        updateFolderButton();
+
+        if (activeFileHandle) {
+            updateFileStatus('open', activeFileHandle.name.replace('.exw', ''));
+        } else {
+            updateFileStatus('noFileOpen');
+        }
+    };
+
+    applyLanguage();
+
+    languageSelect.addEventListener('change', async () => {
+        if (!Object.prototype.hasOwnProperty.call(languages, languageSelect.value)) return;
+        currentLanguage = languageSelect.value;
+        await saveLanguage(currentLanguage);
+        applyLanguage();
+    });
 
     // --- LÓGICA DE AFASTAR O EXCALIDRAW ---
     sidebar.addEventListener('mouseenter', () => document.body.classList.add('sidebar-active'));
@@ -81,13 +313,14 @@
         }
     });
 
-    const pinBtn = document.getElementById('pin-sidebar');
     const isPinned = getCookie('excaliSidebarPinned') === 'true';
     
     if (isPinned) {
         sidebar.classList.add('pinned');
         document.body.classList.add('sidebar-active'); 
         pinBtn.style.opacity = '1';
+        pinBtn.title = translate('unpinSidebar');
+        pinBtn.setAttribute('aria-label', pinBtn.title);
     } else {
         pinBtn.style.opacity = '0.3';
     }
@@ -95,6 +328,8 @@
     pinBtn.addEventListener('click', () => {
         const p = sidebar.classList.toggle('pinned');
         pinBtn.style.opacity = p ? '1' : '0.3';
+        pinBtn.title = p ? translate('unpinSidebar') : translate('pinSidebar');
+        pinBtn.setAttribute('aria-label', pinBtn.title);
         setCookie('excaliSidebarPinned', p);
         if (p) {
             document.body.classList.add('sidebar-active');
@@ -136,13 +371,13 @@
                 const perm = await savedHandle.queryPermission({ mode: 'readwrite' });
                 if (perm === 'granted') {
                     currentDirHandle = savedHandle;
-                    btnSelect.innerText = "📂 Mudar Pasta";
+                    updateFolderButton();
                     const tempHandle = await ensureTemporaryFileExists(); 
                     if (tempHandle) await openExcalidrawFile(tempHandle, currentDirHandle, null);
                     await renderTree(currentDirHandle, document.getElementById('file-tree'), "");
                 } else {
-                    btnSelect.innerText = "🔌 Conectar Pasta";
                     btnSelect.dataset.action = "reactivate";
+                    updateFolderButton();
                 }
             }
         } catch (e) { console.error(e); }
@@ -158,8 +393,8 @@
                     const reqPerm = await savedHandle.requestPermission({ mode: 'readwrite' });
                     if (reqPerm === 'granted') {
                         currentDirHandle = savedHandle;
-                        btnSelect.innerText = "📂 Mudar Pasta";
                         delete btnSelect.dataset.action;
+                        updateFolderButton();
                         const tempHandle = await ensureTemporaryFileExists(); 
                         if (tempHandle) await openExcalidrawFile(tempHandle, currentDirHandle, null);
                         await renderTree(currentDirHandle, document.getElementById('file-tree'), "");
@@ -171,7 +406,8 @@
             currentDirHandle = await window.showDirectoryPicker({ mode: 'readwrite' });
             await saveFolderHandle(currentDirHandle); 
             expandedFolders.clear(); 
-            btnSelect.innerText = "📂 Mudar Pasta";
+            delete btnSelect.dataset.action;
+            updateFolderButton();
             
             const tempHandle = await ensureTemporaryFileExists(); 
             if (tempHandle) {
@@ -190,7 +426,7 @@
             activeParentDirHandle = parentDirHandle;
 
             const displayName = file.name.replace('.exw', '');
-            document.getElementById('active-file-status').innerHTML = `<b>Aberto:</b> ${displayName}`;
+            updateFileStatus('open', displayName);
             document.querySelectorAll('#file-tree li').forEach(el => el.classList.remove('active-file'));
             if (liElement) liElement.classList.add('active-file');
 
@@ -200,7 +436,7 @@
             target.dispatchEvent(new DragEvent('drop', { dataTransfer, bubbles: true, cancelable: true }));
             
             await ensureTemporaryFileExists();
-        } catch (e) { alert("Erro ao carregar."); }
+        } catch (e) { alert(translate('errorLoading')); }
     }
 
     async function saveCurrentFile(isAutoSave = false) {
@@ -219,13 +455,11 @@
             await w.write(data); await w.close();
 
             const displayName = activeFileHandle.name.replace('.exw', '');
-            const statusDiv = document.getElementById('active-file-status');
-            const msg = isAutoSave ? '🔄 Auto-Salvo' : '✅ Salvo';
-            statusDiv.innerHTML = `<span style="color: #4caf50;">${msg}: ${displayName}</span>`;
+            updateFileStatus(isAutoSave ? 'autoSaved' : 'saved', displayName);
             setTimeout(() => { 
                 if (activeFileHandle) {
                     const currName = activeFileHandle.name.replace('.exw', '');
-                    statusDiv.innerHTML = `<b>Aberto:</b> ${currName}`; 
+                    updateFileStatus('open', currName);
                 }
             }, 1500);
         } catch (e) {}
@@ -297,11 +531,11 @@
     }
 
     // 5. Botões Novo e Excluir
-    document.getElementById('btn-new-file').addEventListener('click', async () => {
+    btnNewFile.addEventListener('click', async () => {
         try {
             const h = await window.showSaveFilePicker({
-                suggestedName: 'Novo_Projeto.exw',
-                types: [{ description: 'Excalidraw Workspace', accept: { 'application/json': ['.exw'] } }]
+                suggestedName: translate('suggestedFileName'),
+                types: [{ description: translate('saveFileDescription'), accept: { 'application/json': ['.exw'] } }]
             });
             const b = JSON.stringify({ type: "excalidraw", version: 2, elements: [], appState: {}, files: {} });
             const w = await h.createWritable(); await w.write(b); await w.close();
@@ -310,10 +544,10 @@
         } catch (e) {}
     });
 
-    document.getElementById('btn-delete-file').addEventListener('click', async () => {
-        if (!activeFileHandle || !activeParentDirHandle) return alert("Selecione um arquivo na lista.");
+    btnDeleteFile.addEventListener('click', async () => {
+        if (!activeFileHandle || !activeParentDirHandle) return alert(translate('selectFile'));
         const cleanName = activeFileHandle.name.replace('.exw', '');
-        if (!confirm(`Tem certeza que deseja excluir "${cleanName}"?`)) return;
+        if (!confirm(translate('confirmDelete', { name: cleanName }))) return;
         try {
             const f = await activeFileHandle.getFile();
             const c = await f.text();
@@ -337,7 +571,7 @@
             if (tempHandle) {
                 await openExcalidrawFile(tempHandle, currentDirHandle, null);
             } else {
-                document.getElementById('active-file-status').innerText = "Excluído";
+                updateFileStatus('deleted');
             }
 
         } catch (e) {

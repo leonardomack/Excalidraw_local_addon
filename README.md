@@ -1,4 +1,4 @@
-# Excalidraw Local Add-on
+# Excalidraw Local Addon
 
 > Uma barra lateral local para organizar, abrir e salvar projetos do [Excalidraw](https://excalidraw.com/) em pastas do computador.
 
@@ -13,6 +13,7 @@ Este projeto é um complemento de navegador no formato de código de usuário (*
 O Excalidraw é uma ferramenta de desenho e quadro branco digital acessível pelo navegador. Por padrão, seus arquivos podem ser abertos e salvos por meio dos recursos da própria aplicação. Este complemento acrescenta uma experiência semelhante a um gerenciador de projetos:
 
 - cria uma barra lateral recolhida na borda esquerda da tela;
+- permite escolher entre português (Brasil), inglês, espanhol, francês, italiano e alemão;
 - permite escolher uma pasta local como pasta de projetos;
 - reproduz a hierarquia de subpastas;
 - lista arquivos com extensão `.exw`;
@@ -85,6 +86,21 @@ Salve ou ative a regra e recarregue `https://excalidraw.com/`. Se a extensão of
 6. A árvore de arquivos será preenchida com as subpastas e os arquivos `.exw` encontrados.
 
 Depois da primeira autorização, o script guarda o identificador da pasta em IndexedDB para tentar reconectar automaticamente após um recarregamento. O navegador pode exigir uma nova ação do usuário em algum momento; nesse caso, o botão mudará para **Conectar Pasta**.
+
+### Alterar o idioma
+
+Use o seletor **Idioma** no topo da barra lateral para escolher uma das seis opções disponíveis:
+
+- Português (Brasil);
+- English;
+- Español;
+- Français;
+- Italiano;
+- Deutsch.
+
+A escolha é salva em IndexedDB no mesmo banco `ExcaliLocalDB` e no mesmo object store `settings` usados para persistir a pasta. A pasta continua armazenada na chave `folderHandle`, enquanto o idioma fica armazenado na chave `language`. Assim, o idioma escolhido é restaurado quando a página é recarregada. O padrão inicial é português (Brasil) quando nenhuma escolha anterior é encontrada.
+
+A tradução é aplicada ao nome da aplicação, botões, seletor, dica de fixação, estados do arquivo, mensagens de erro, confirmação de exclusão e descrição do arquivo criado pelo seletor nativo.
 
 ### Uso da barra lateral
 
@@ -257,6 +273,7 @@ Excalidraw is a browser-based drawing and whiteboard application. This project a
 The add-on provides:
 
 - a collapsible sidebar on the left side of Excalidraw;
+- a language selector for Brazilian Portuguese, English, Spanish, French, Italian and German;
 - a local project-folder picker;
 - nested folder navigation;
 - `.exw` file listing;
@@ -329,6 +346,12 @@ Paste the complete contents of [`JS.js`](./JS.js) into the extension's JavaScrip
 6. Browse the folders and `.exw` files shown in the tree.
 
 The handle is persisted in IndexedDB so the script can try to reconnect after a reload. The browser may require a fresh user gesture and permission request later; the button then changes to **Conectar Pasta**.
+
+### Changing the language
+
+Use the **Idioma** selector at the top of the sidebar to choose one of the six available languages: Portuguese (Brazil), English, Spanish, French, Italian or German. The selection is saved in IndexedDB in the same `ExcaliLocalDB` database and `settings` object store used for the selected directory. The directory remains under the `folderHandle` key, while the language is stored under the `language` key.
+
+The selected language is restored after a page reload. If no previous choice exists, the initial language is Brazilian Portuguese. Translations cover the application name, buttons, pin hint, file statuses, error and delete-confirmation messages, and the native save-picker description and suggested filename.
 
 ### Using the sidebar
 
