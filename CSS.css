@@ -1,0 +1,89 @@
+/* Container principal da Sidebar */
+#custom-excalidraw-sidebar {
+    position: fixed; top: 0; left: 0; height: 100vh; width: 15px;
+    background-color: #121212; color: #e0e0e0; z-index: 9999999;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden; 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    border-right: 1px solid #333; box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+    display: flex; flex-direction: column;
+    font-size: 13px; 
+}
+
+#custom-excalidraw-sidebar:hover, 
+#custom-excalidraw-sidebar.pinned { width: 300px; }
+
+#custom-excalidraw-sidebar .sidebar-content {
+    opacity: 0; transition: opacity 0.2s ease; width: 300px;
+    padding: 15px; box-sizing: border-box;
+    display: flex; flex-direction: column; height: 100vh;
+}
+
+#custom-excalidraw-sidebar:hover .sidebar-content,
+#custom-excalidraw-sidebar.pinned .sidebar-content { opacity: 1; }
+
+/* Estilização dos Botões */
+.sidebar-buttons { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; flex-shrink: 0;}
+.sidebar-btn {
+    flex: 1 1 30%; border: none; padding: 8px; border-radius: 6px;
+    cursor: pointer; font-weight: bold; font-size: 10px; 
+    color: white; box-sizing: border-box; text-align: center; text-transform: uppercase;
+}
+
+#btn-select-folder { background-color: #6965db; flex: 1 1 100%; margin-bottom: 2px;}
+#btn-select-folder:hover { background-color: #5b58c7; }
+
+#btn-new-file { background-color: #2b8a3e; }
+#btn-new-file:hover { background-color: #237032; }
+
+#btn-delete-file { background-color: #c92a2a; }
+#btn-delete-file:hover { background-color: #a61e1e; }
+
+/* Área de Rolagem Exclusiva para a Árvore de Arquivos */
+#file-tree {
+    flex: 1; overflow-y: auto; overflow-x: hidden; margin-bottom: 10px;
+}
+#file-tree::-webkit-scrollbar { width: 6px; }
+#file-tree::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+
+/* Árvore de Arquivos - RECUO MENOR E RESPIRO VERTICAL AGRADÁVEL */
+#file-tree ul { list-style-type: none; padding-left: 8px; margin: 0; } /* Recuo horizontal reduzido para 8px */
+#file-tree > ul { padding-left: 0; }
+#file-tree li {
+    cursor: pointer; padding: 4px 6px; border-radius: 4px; /* Padding vertical ajustado para 4px */
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; user-select: none;
+    border-left: 3px solid transparent; transition: all 0.2s;
+    margin: 0; line-height: 1.3; /* Texto com respiro mais suave (1.3) */
+}
+#file-tree li:hover { background-color: #2a2a2a; }
+
+.active-file {
+    background-color: #2a2a2a !important;
+    border-left: 3px solid #6965db !important;
+    font-weight: bold; color: #fff;
+}
+
+.folder-icon { color: #dcb67a; margin-right: 5px; }
+.file-icon { color: #6965db; margin-right: 5px; }
+
+/* Rodapé Fixo */
+#active-file-status {
+    font-size: 10px;  
+    color: #888; padding-top: 10px; 
+    border-top: 1px solid #333; word-break: break-all;
+    flex-shrink: 0; 
+}
+
+/* =========================================================
+   ANIMAÇÃO DO EXCALIDRAW (DESLOCAMENTO DO APLICATIVO)
+   ========================================================= */
+.excalidraw-container {
+    left: 15px !important;
+    width: calc(100% - 15px) !important;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+body.sidebar-active .excalidraw-container {
+    left: 300px !important;
+    width: calc(100% - 300px) !important;
+}
