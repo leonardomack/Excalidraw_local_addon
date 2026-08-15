@@ -102,11 +102,15 @@ A escolha é salva em IndexedDB no mesmo banco `ExcaliLocalDB` e no mesmo object
 
 A tradução é aplicada ao nome discreto da aplicação no rodapé, tooltips dos ícones, seletor, dica de fixação, estados do arquivo, mensagens de erro, confirmação de exclusão e descrição do arquivo criado pelo seletor nativo.
 
+### Tema visual
+
+A barra lateral acompanha o tema encontrado no carregamento da página do Excalidraw. O script verifica o tema salvo no estado do aplicativo, as classes e atributos de tema da página e, como fallback, a preferência de tema do sistema. A interface usa ícones SVG monocromáticos e ajusta fundo, texto, bordas, hover, seleção, controles e tooltips para o modo claro ou escuro. Para aplicar uma mudança de tema feita depois do carregamento, recarregue a página.
+
 ### Uso da barra lateral
 
 #### Ações e abrir uma pasta
 
-Na parte superior, os três ícones à esquerda representam **Novo**, **Excluir** e **Abrir Projetos**. Depois que uma pasta é conectada, o terceiro ícone passa a representar **Mudar Pasta**. Passe o mouse sobre um ícone para ver sua tooltip. O pin vermelho fica alinhado à direita e fixa ou libera a barra lateral.
+Na parte superior, os três ícones monocromáticos à esquerda representam **Novo**, **Excluir** e **Abrir Projetos**. Depois que uma pasta é conectada, o terceiro ícone passa a representar **Mudar Pasta**. Passe o mouse sobre um ícone para ver sua tooltip. O pin fica alinhado à direita e fixa ou libera a barra lateral.
 
 O ícone de pasta abre o seletor de diretórios. Na primeira utilização ele escolhe a pasta; nas utilizações seguintes, permite trocar a pasta selecionada.
 
@@ -355,9 +359,13 @@ Click the globe icon in the sidebar footer to open the **Language** selector and
 
 The selected language is restored after a page reload. If no previous choice exists, the initial language is Brazilian Portuguese. Translations cover the application name, buttons, pin hint, file statuses, error and delete-confirmation messages, and the native save-picker description and suggested filename.
 
+### Visual theme
+
+The sidebar follows the theme detected when the Excalidraw page loads. The script checks the theme saved in the application's state, page theme classes and attributes, and finally the system color-scheme preference as a fallback. The interface uses monochrome SVG icons and adjusts its background, text, borders, hover states, selection, controls and tooltips for light or dark mode. Reload the page to apply a theme change made after the initial load.
+
 ### Using the sidebar
 
-At the top, the three icons on the left represent **New**, **Delete** and **Open Projects**. After a directory is connected, the third icon represents **Change Folder**. Hover over an icon to see its tooltip. The red pin is aligned to the right and keeps the sidebar pinned or released.
+At the top, the three monochrome icons on the left represent **New**, **Delete** and **Open Projects**. After a directory is connected, the third icon represents **Change Folder**. Hover over an icon to see its tooltip. The pin is aligned to the right and keeps the sidebar pinned or released.
 
 Click the folder icon to choose a directory or change the current directory. The tree refreshes every five seconds while a directory is connected. Directories are listed before files, and entries are sorted alphabetically within each group.
 

@@ -205,6 +205,34 @@
         return message;
     };
 
+    // --- ÍCONES MONOCROMÁTICOS ---
+    const icons = {
+        newFile: '<svg class="menu-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h8l4 4V20.5H6z"></path><path d="M14 3.5v5h4"></path><path d="M12 12v5M9.5 14.5h5"></path></svg>',
+        deleteFile: '<svg class="menu-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14M10 4h4l1 3H9zM7 7l.8 13h8.4L17 7M10 10.5v6M14 10.5v6"></path></svg>',
+        folder: '<svg class="menu-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 7.5A1.5 1.5 0 0 1 5 6h5l2 2h7.5A1.5 1.5 0 0 1 21 9.5v8A1.5 1.5 0 0 1 19.5 19h-14A1.5 1.5 0 0 1 4 17.5z"></path></svg>',
+        folderOpen: '<svg class="menu-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7H10l2 2h7.5a1.5 1.5 0 0 1 1.4 2l-2.1 6.5a2 2 0 0 1-1.9 1.5H5.2a2 2 0 0 1-1.9-2.5z"></path></svg>',
+        file: '<svg class="menu-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h8l4 4V20.5H6z"></path><path d="M14 3.5v5h4"></path></svg>',
+        pin: '<svg class="menu-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4h8M9 4l1 6-3 3h10l-3-3 1-6M12 13v7"></path></svg>',
+        globe: '<svg class="menu-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M3.8 9h16.4M3.8 15h16.4M12 3.5c2.1 2.3 3.1 5.1 3.1 8.5S14.1 18.2 12 20.5C9.9 18.2 8.9 15.4 8.9 12S9.9 5.8 12 3.5z"></path></svg>'
+    };
+
+    const icon = (name) => icons[name] || '';
+
+    // --- TEMA DO EXCALIDRAW ---
+    const detectExcalidrawTheme = () => {
+        try {
+            const savedState = JSON.parse(localStorage.getItem('excalidraw-state') || '{}');
+            const savedTheme = savedState.theme || savedState.appState?.theme;
+            if (savedTheme === 'dark' || savedTheme === 'light') return savedTheme;
+        } catch (e) {}
+
+        const pageTheme = `${document.documentElement.className} ${document.documentElement.dataset.theme || ''} ${document.body?.className || ''} ${document.body?.dataset.theme || ''}`.toLowerCase();
+        if (/(^|[\s_-])dark([\s_-]|$)/.test(pageTheme)) return 'dark';
+        if (/(^|[\s_-])light([\s_-]|$)/.test(pageTheme)) return 'light';
+
+        return window.matchMedia?.('(prefers-color-scheme: dark)')?.matches ? 'dark' : 'light';
+    };
+
     // --- ESCUDO LOCAL ---
     if ('serviceWorker' in navigator) navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister()));
     window.WebSocket = function() { return { send: () => {}, close: () => {}, addEventListener: () => {}, readyState: 0 }; };
@@ -223,17 +251,17 @@
         <div class="sidebar-content">
             <div class="sidebar-header">
                 <div class="sidebar-actions">
-                    <button id="btn-new-file" class="sidebar-icon-btn" type="button">📄</button>
-                    <button id="btn-delete-file" class="sidebar-icon-btn" type="button">🗑️</button>
-                    <button id="btn-select-folder" class="sidebar-icon-btn" type="button">📂</button>
+                    <button id="btn-new-file" class="sidebar-icon-btn" type="button">${icon('newFile')}</button>
+                    <button id="btn-delete-file" class="sidebar-icon-btn" type="button">${icon('deleteFile')}</button>
+                    <button id="btn-select-folder" class="sidebar-icon-btn" type="button">${icon('folder')}</button>
                 </div>
-                <button id="pin-sidebar" class="pin-button" type="button">📌</button>
+                <button id="pin-sidebar" class="pin-button" type="button">${icon('pin')}</button>
             </div>
             <div id="file-tree"></div>
             <div id="active-file-status"></div>
             <div class="sidebar-footer">
                 <div class="language-control">
-                    <button id="language-toggle" class="footer-icon-btn" type="button" aria-expanded="false">🌐</button>
+                    <button id="language-toggle" class="footer-icon-btn" type="button" aria-expanded="false">${icon('globe')}</button>
                     <select id="language-select" aria-label="">
                         ${Object.entries(languages).map(([code, name]) => `<option value="${code}">${name}</option>`).join('')}
                     </select>
@@ -243,6 +271,13 @@
         </div>
     `;
     document.body.appendChild(sidebar);
+
+    // O tema é calculado uma única vez no carregamento para evitar observadores
+    // que possam entrar em ciclo ao alterar atributos da própria barra lateral.
+    const applyTheme = () => {
+        sidebar.dataset.theme = detectExcalidrawTheme();
+    };
+    applyTheme();
 
     const btnSelect = document.getElementById('btn-select-folder');
     const btnNewFile = document.getElementById('btn-new-file');
@@ -276,7 +311,7 @@
         } else if (status === 'saved' || status === 'autoSaved') {
             const message = status === 'autoSaved' ? translate('autoSaved') : translate('saved');
             const label = document.createElement('span');
-            label.style.color = '#4caf50';
+            label.style.color = 'var(--sidebar-text)';
             label.innerText = `${message}: ${name}`;
             statusDiv.appendChild(label);
         } else {
