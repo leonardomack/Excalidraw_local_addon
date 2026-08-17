@@ -2,6 +2,10 @@
 
 > Uma barra lateral local para organizar, abrir e salvar projetos do [Excalidraw](https://excalidraw.com/) em pastas do computador.
 
+**Versão atual:** `v0.1.0-beta` · [Ver release](../../releases/tag/v0.1.0-beta)
+
+> Esta é a primeira versão pública beta. O projeto está funcional para testes, mas ainda possui limitações conhecidas relacionadas ao formato dos arquivos, recursos incorporados e compatibilidade com futuras mudanças do Excalidraw.
+
 Este projeto é um complemento de navegador no formato de código de usuário (*user script* + CSS). Ele não é uma extensão Chrome empacotada: para utilizá-lo, o código de [`JS.js`](./JS.js) e [`CSS.css`](./CSS.css) deve ser instalado em uma extensão capaz de injetar JavaScript e CSS nas páginas, como [User JavaScript and CSS v3.1.2](https://chromewebstore.google.com/detail/nbhcbdghjpllgmfilhnhkllmkecfmpld?utm_source=item-share-cb).
 
 ---
@@ -56,8 +60,10 @@ O projeto depende de APIs modernas do navegador, principalmente `showDirectoryPi
 #### 1. Baixe ou clone este repositório
 
 ```bash
-git clone https://github.com/SEU-USUARIO/Excalidraw_local_addon.git
+git clone <URL-DO-REPOSITÓRIO>
 ```
+
+No GitHub, clique em **Code**, copie a URL HTTPS do repositório e substitua `<URL-DO-REPOSITÓRIO>` pelo endereço copiado.
 
 Também é possível baixar o repositório como ZIP. Os arquivos necessários são:
 
@@ -294,11 +300,15 @@ Use **Watch** para acompanhar novas versões, abra uma [Issue](../../issues) par
 
 ### Licença
 
-Nenhuma licença foi definida neste repositório até o momento. Antes de publicar uma versão pública, escolha e adicione um arquivo `LICENSE` compatível com a forma como você deseja que outras pessoas usem, modifiquem e redistribuam o código.
+Para esta release pública, adicione um arquivo `LICENSE` na raiz do repositório antes de publicar. A licença define como outras pessoas podem usar, modificar e redistribuir o código. A Licença MIT é uma opção adequada para este projeto por ser permissiva e facilitar forks e contribuições.
 
 ---
 
 ## English
+
+**Current version:** `v0.1.0-beta` · [View release](../../releases/tag/v0.1.0-beta)
+
+> This is the first public beta release. The project is functional for testing, but it still has known limitations related to the file format, embedded resources and compatibility with future Excalidraw changes.
 
 ### What it is
 
@@ -352,8 +362,10 @@ The implementation relies on modern browser APIs such as `showDirectoryPicker()`
 #### 1. Download or clone the repository
 
 ```bash
-git clone https://github.com/YOUR-USER/Excalidraw_local_addon.git
+git clone <REPOSITORY-URL>
 ```
+
+On GitHub, click **Code**, copy the repository's HTTPS URL and replace `<REPOSITORY-URL>` with the copied address.
 
 The required files are:
 
@@ -505,7 +517,7 @@ Use **Watch** to receive updates, open an [Issue](../../issues) to report a bug 
 
 ### License
 
-No license is currently defined in this repository. Before publishing a public release, add a `LICENSE` file that matches how you want others to use, modify and redistribute the code.
+For this public release, add a `LICENSE` file to the repository root before publishing. The license defines how others may use, modify and redistribute the code. The MIT License is a suitable option for this project because it is permissive and makes forks and contributions easier.
 
 ### References
 
