@@ -2,9 +2,13 @@
 
 > Uma barra lateral local para organizar, abrir e salvar projetos do [Excalidraw](https://excalidraw.com/) em pastas do computador.
 
-**Versão atual:** `v0.1.0-beta` · [Ver release](../../releases/tag/v0.1.0-beta)
+**Versão atual:** `v0.1.0` · [Ver release oficial](https://github.com/leonardomack/Excalidraw_local_addon/releases/tag/v0.1.0)
 
-> Esta é a primeira versão pública beta. O projeto está funcional para testes, mas ainda possui limitações conhecidas relacionadas ao formato dos arquivos, recursos incorporados e compatibilidade com futuras mudanças do Excalidraw.
+[![Latest Release](https://img.shields.io/github/v/release/leonardomack/Excalidraw_local_addon?label=latest%20release)](https://github.com/leonardomack/Excalidraw_local_addon/releases/latest)
+
+[Baixar a release v0.1.0](https://github.com/leonardomack/Excalidraw_local_addon/releases/tag/v0.1.0)
+
+> Esta é a primeira release pública. O projeto está funcional, mas ainda possui limitações conhecidas relacionadas ao formato dos arquivos, recursos incorporados e compatibilidade com futuras mudanças do Excalidraw.
 
 Este projeto é um complemento de navegador no formato de código de usuário (*user script* + CSS). Ele não é uma extensão Chrome empacotada: para utilizá-lo, o código de [`JS.js`](./JS.js) e [`CSS.css`](./CSS.css) deve ser instalado em uma extensão capaz de injetar JavaScript e CSS nas páginas, como [User JavaScript and CSS v3.1.2](https://chromewebstore.google.com/detail/nbhcbdghjpllgmfilhnhkllmkecfmpld?utm_source=item-share-cb).
 
@@ -306,9 +310,13 @@ Para esta release pública, adicione um arquivo `LICENSE` na raiz do repositóri
 
 ## English
 
-**Current version:** `v0.1.0-beta` · [View release](../../releases/tag/v0.1.0-beta)
+**Current version:** `v0.1.0` · [View official release](https://github.com/leonardomack/Excalidraw_local_addon/releases/tag/v0.1.0)
 
-> This is the first public beta release. The project is functional for testing, but it still has known limitations related to the file format, embedded resources and compatibility with future Excalidraw changes.
+[![Latest Release](https://img.shields.io/github/v/release/leonardomack/Excalidraw_local_addon?label=latest%20release)](https://github.com/leonardomack/Excalidraw_local_addon/releases/latest)
+
+[Download release v0.1.0](https://github.com/leonardomack/Excalidraw_local_addon/releases/tag/v0.1.0)
+
+> This is the first public release. The project is functional, but it still has known limitations related to the file format, embedded resources and compatibility with future Excalidraw changes.
 
 ### What it is
 
