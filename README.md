@@ -25,6 +25,16 @@ O Excalidraw é uma ferramenta de desenho e quadro branco digital acessível pel
 
 O objetivo é manter os desenhos organizados no disco, sem um servidor ou banco de dados próprio do projeto.
 
+Este é um **Chrome sidebar para arquivos locais do Excalidraw**, com **árvore de pastas** para abrir e salvar desenhos em um fluxo de trabalho **local-first** para um quadro branco baseado no navegador.
+
+### Quick Start
+
+1. Instale a extensão [User JavaScript and CSS v3.1.2](https://chromewebstore.google.com/detail/nbhcbdghjpllgmfilhnhkllmkecfmpld?utm_source=item-share-cb).
+2. Crie uma regra para `https://excalidraw.com/*`.
+3. Cole [`JS.js`](./JS.js) no campo JavaScript e [`CSS.css`](./CSS.css) no campo CSS.
+4. Salve a regra e recarregue o Excalidraw.
+5. Selecione uma pasta local para começar a organizar seus projetos.
+
 ### Como funciona em alto nível
 
 O `JS.js` é executado dentro da página do Excalidraw e cria a interface da barra lateral. O `CSS.css` define a aparência, a animação e o deslocamento da área do Excalidraw quando a barra é aberta.
@@ -264,6 +274,24 @@ Este é um projeto de injeção direta e não possui etapa de compilação ou de
 
 Ao publicar alterações, descreva no histórico qualquer mudança que afete permissões de arquivos, o formato `.exw`, o salvamento automático, WebSocket ou Service Workers.
 
+### Roadmap
+
+- [x] Navegação por pastas locais
+- [x] Salvamento automático
+- [x] Interface multilíngue
+- [x] Tema claro e escuro
+- [ ] Preservar imagens e recursos incorporados
+- [ ] Restaurar arquivos excluídos
+- [ ] Pesquisar projetos
+- [ ] Publicar uma extensão Chrome empacotada
+- [ ] Renomear arquivos pela barra lateral
+
+### Apoie o projeto (Support the project)
+
+Se este complemento ajudar você a organizar seus projetos do Excalidraw, considere dar uma ⭐ **Star** ao repositório.
+
+Use **Watch** para acompanhar novas versões, abra uma [Issue](../../issues) para relatar problemas ou sugerir melhorias e envie um [Pull Request](../../pulls) com suas contribuições.
+
 ### Licença
 
 Nenhuma licença foi definida neste repositório até o momento. Antes de publicar uma versão pública, escolha e adicione um arquivo `LICENSE` compatível com a forma como você deseja que outras pessoas usem, modifiquem e redistribuam o código.
@@ -290,6 +318,16 @@ The add-on provides:
 - deletion with a `.exw.deleted` copy created first.
 
 The goal is to keep Excalidraw drawings organized on the local disk without adding a project-specific server or database.
+
+This is a **Chrome sidebar for local Excalidraw files**, with a **folder tree** to open and save Excalidraw files in a **local-first drawing workflow** for a **browser-based whiteboard**.
+
+### Quick Start
+
+1. Install [User JavaScript and CSS v3.1.2](https://chromewebstore.google.com/detail/nbhcbdghjpllgmfilhnhkllmkecfmpld?utm_source=item-share-cb).
+2. Create a rule for `https://excalidraw.com/*`.
+3. Paste [`JS.js`](./JS.js) into the JavaScript field and [`CSS.css`](./CSS.css) into the CSS field.
+4. Save the rule and reload Excalidraw.
+5. Select a local folder to start organizing your projects.
 
 ### How it works
 
@@ -446,6 +484,24 @@ Excalidraw_local_addon/
 There is no build step or npm dependency. Edit `JS.js` or `CSS.css`, paste the updated contents into the injection rule, reload Excalidraw, and test folder selection, opening, creation, saving, deletion, reconnection and tree refresh.
 
 When publishing changes, document anything that affects filesystem permissions, the `.exw` format, autosave, WebSocket or Service Workers.
+
+### Roadmap
+
+- [x] Local folder navigation
+- [x] Automatic saving
+- [x] Multi-language interface
+- [x] Light and dark themes
+- [ ] Preserve embedded images and resources
+- [ ] Restore deleted files
+- [ ] Search projects
+- [ ] Publish a packaged Chrome extension
+- [ ] Rename files from the sidebar
+
+### Support the project
+
+If this addon helps you organize your Excalidraw projects, consider giving the repository a ⭐ **Star**.
+
+Use **Watch** to receive updates, open an [Issue](../../issues) to report a bug or suggest an improvement, and submit a [Pull Request](../../pulls) if you would like to contribute.
 
 ### License
 
